@@ -11,3 +11,5 @@ while True:
 		print(txt)
 	except EOFError:
 	    break
+
+	
