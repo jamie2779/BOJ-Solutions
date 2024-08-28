@@ -1,20 +1,16 @@
-#insert 사용으로 시간초과 발생 -> stack 사용 고려
-a = list(input())
-l = len(a)
-cu = l
-for i in range(int(input())):
-    cmd = input()
-    if cmd[0] == 'L':
-        cu = max(0,cu-1)
-    elif cmd[0] == 'D':
-        cu = min(cu+1,l)
-    elif cmd[0] =='B':
-        if cu>0:
-            del a[cu-1]
-            cu-=1
-            l-=1
-    else:
-        a.insert(cu,cmd[2])
-        cu+=1
-        l+=1
-print(''.join(a))
+left = list(input())
+right = []
+n = int(input())
+for i in range(n):
+    cmd = input().split()
+    if cmd[0] == "P":
+        left.append(cmd[1])
+    elif cmd[0] == "L" and left:
+        right.append(left.pop())
+    elif cmd[0] == "D" and right:
+        left.append(right.pop())
+    elif cmd[0] == "B" and left:
+        left.pop()
+    
+print("".join(left)+"".join(right[::-1]))
+
