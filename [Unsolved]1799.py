@@ -21,7 +21,7 @@ def put(board,i,j):
             dxi = dx*d + i
             dyi = dy*d + j
             if 0<=dxi and dxi<n and 0<=dyi and dyi<n:
-                new[dxi][dyi] = 0
+                new[dxi][dyi] = 0``
     new[i][j] = 2
     return new
 
