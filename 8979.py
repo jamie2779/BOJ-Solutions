@@ -1,18 +1,22 @@
 n, k = map(int,input().split())
-a = []
-b = {}
-for i in range(n):
-    n, g, s, b = map(int,input().split())
-    b[n] = tuple([g, s, b])
-    a.append((g,s,b))
-a = list(set(a))
-a.sort(key=lambda x: (x[1],x[2],x[3]), reverse=True)
 
-print(a)
-cnt = 0
-for i in a:       
-    cnt += 1
-    if i == b[k]:
-        print(cnt) 
+medal = []
+rank = [1]
+
+for i in range(n):
+    medal.append(list(map(int,input().split())))
+
+medal.sort(key= lambda x: -x[3])
+medal.sort(key= lambda x: -x[2])
+medal.sort(key= lambda x: -x[1])
+
+for i in range(1,n):
+    if medal[i-1][1] == medal[i][1] and medal[i-1][2] == medal[i][2] and medal[i-1][3] == medal[i][3]:
+        rank.append(rank[-1])
+    else:
+        rank.append(i+1)
+
+for i in range(n):
+    if medal[i][0] == k:
+        print(rank[i])
         break
-    
