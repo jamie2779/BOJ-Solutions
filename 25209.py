@@ -1,3 +1,7 @@
+#대각선임 문제인줄 알고 디버깅 계속했는데
+#사실은 square2함수에서 x,y축과 평행한 사각형 판단하는거 오류였음
+
+
 n, m = map(int,input().split())
 board = [[0 for i in range(m)] for j in range(n)]
 visited = [[True for i in range(m)] for j in range(n)]
@@ -5,7 +9,6 @@ s = []
 result = True
 for i in range(n*3):
     s.append(input())
-
 for i in range(n):
     for j in range(m):
         tile = []
@@ -28,7 +31,13 @@ for i in range(n):
             board[i][j] = 10
         else:
             board[i][j] = 6
-
+# board = []
+# for i in range(n):
+#     board.append(list(map(int,input().split())))
+# for i in range(n):
+#     for j in range(m):
+#         if board[i][j] == 5:
+#             visited[i][j] = False
 def square1(r,c):
     if board[r][c] == 7:
         if r-1<0 or c+1>=m:
@@ -157,10 +166,15 @@ def square2(r,c):
         visited[r][c+w] = True
         w += 1
     while r+h < n and not visited[r+h][c]:
-        for i in range(c,c+w):
-            if visited[r+h][i]:
-                return False
-            visited[r+h][i] = True
+        if c-1>=0 and not visited[r+h][c-1]:
+            return False
+        length = 0
+        while c+length < m and not visited[r+h][c+length]:
+            visited[r+h][c+length] = True
+            length += 1
+
+        if length != w:
+            return False
         h+=1
     if r+h<n:
         for i in range(c,c+w):
