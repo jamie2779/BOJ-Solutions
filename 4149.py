@@ -42,7 +42,6 @@ def gcd(a,b):
         a = b
         b = c
     return a
-nums = set()
 
 def div(n):
     if isPrime(n):
@@ -68,13 +67,12 @@ def div(n):
     else:
         return div(d)
 
+nums = []
 while n>1:
     d = div(n)
-    if d not in nums:
-        res *= d-1
-        res //= d
-        nums.add(d)
+    nums.append(d)
     n//=d
 
 
-print(int(res))
+for i in sorted(nums):
+    print(i)
