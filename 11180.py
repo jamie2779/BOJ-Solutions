@@ -1,20 +1,18 @@
 n,m = map(int,input().split())
-a = []
-for _ in range(n):
-    can = list(map(int,input().split()))[1:]
-    a.append(can)    
-    a.append(can)
-    
-n *= 2
+exp = [[]for _ in range(n)]
+for _ in range(m):
+    a,b = map(int,input().split())
+    exp[a-1].append(b-1)
+    exp[b-1].append(a-1)
 
-selected = [-1] * (m+1)
+selected = [-1] * n
 
 def sol(n):
     if visited[n]:
         return False
     visited[n] = True
 
-    for i in a[n]:
+    for i in exp[n]:
         if selected[i] == -1 or sol(selected[i]):
             selected[i] = n
             return True
@@ -28,5 +26,9 @@ s = 0
 for i in selected:
     if i != -1:
         s += 1
-print(s)
 
+if -1 in selected:
+    print("Impossible")
+else:
+    for i in selected:
+        print(i+1)
